@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -29,9 +29,6 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
       
-      - name: Modules and Components Test
-        run: |
-          write-host "blabla"
-          $a = 1+1
-          write-host $a
-        shell: pwsh
+      - name: Validate ARM Modules
+        run: find ./Modules | grep .json | xargs -L1 python -mjson.tool > /dev/null
+        shell: cmd
