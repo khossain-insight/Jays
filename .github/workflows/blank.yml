@@ -44,6 +44,7 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
       
-      - name: Validate ARM Modules
-        run: find ./Modules | grep .json | xargs -L1 python -mjson.tool > /dev/null
-        shell: cmd
+      - name: json-syntax-check
+        uses: limitusus/json-syntax-check@v1
+        with:
+          pattern: "\\.json$"
