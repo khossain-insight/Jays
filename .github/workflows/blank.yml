@@ -41,6 +41,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: myartifact
+          path: ${{ github.workspace }}
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -52,11 +58,6 @@ jobs:
           cd ${{ github.workspace }}
           dir
           
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.4
-        with:
-          name: myartifact
-          path: ./
   Test:
     runs-on: windows-latest
     steps:
