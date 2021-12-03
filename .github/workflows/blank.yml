@@ -21,6 +21,12 @@ on:
           - foo
           - bar
           - baz
+      choice1:
+        type: choice
+        description: Make another choice
+        options:
+          - he
+          - ha
      
 env:
   agentWin: windows-latest
@@ -29,7 +35,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ${agentWin}
+    runs-on: ${{env.agentWin}}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -38,5 +44,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: |
+          echo "${{ github.event.inputs.choice }}"
+          echo "${{ github.event.inputs.choice1 }}"
       
