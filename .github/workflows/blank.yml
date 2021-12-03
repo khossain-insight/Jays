@@ -58,7 +58,7 @@ jobs:
           echo ${{ github.workspace }}
           cd ${{ github.workspace }}
           dir
-          echo ${{ secrets.MY_${{TES}} }}
+          echo ${{ secrets.MY_$(TES) }}
           
   Test:
     needs: build
