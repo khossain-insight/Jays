@@ -48,4 +48,7 @@ jobs:
           echo "${{ github.event.inputs.choice }}"
           echo ${{ github.event.inputs.choice1 }}
           echo ${{ env.agentWin }}
+          echo ${{ github.workspace }}
+          cd ${{ github.workspace }}
+          dir
       
