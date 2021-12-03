@@ -58,7 +58,7 @@ jobs:
           name: myartifact
           path: ./
   Test:
-    runs-on: windows-lates
+    runs-on: windows-latest
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
