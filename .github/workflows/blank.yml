@@ -45,7 +45,6 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: myartifact
           path: ${{ github.workspace }}
 
       # Runs a single command using the runners shell
@@ -63,8 +62,6 @@ jobs:
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
-        with:
-          name: myartifact
           
       - name: Run a one-line script
         run: |
