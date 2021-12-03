@@ -30,6 +30,7 @@ on:
      
 env:
   agentWin: windows-latest
+  TES: TEST
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -57,10 +58,11 @@ jobs:
           echo ${{ github.workspace }}
           cd ${{ github.workspace }}
           dir
+          echo ${{ secrets.MY_${{TES}} }}
           
   Test:
     needs: build
-    if: success()
+    if: failure()
     runs-on: windows-latest
     steps:
       - name: Download a Build Artifact
