@@ -60,6 +60,7 @@ jobs:
           
   Test:
     needs: build
+    if: failed()
     runs-on: windows-latest
     steps:
       - name: Download a Build Artifact
