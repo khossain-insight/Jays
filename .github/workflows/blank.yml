@@ -58,6 +58,7 @@ jobs:
           dir
           
   Test:
+    needs: build
     runs-on: windows-latest
     steps:
       - name: Download a Build Artifact
