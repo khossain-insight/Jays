@@ -54,7 +54,7 @@ jobs:
       - name: Run a one-line script
         run: |
           az account show
-          
+      
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
@@ -69,7 +69,7 @@ jobs:
           
   Test:
     needs: build
-    if: success()
+    if: failure()
     runs-on: ubuntu-latest
     steps:
       - name: Download a Build Artifact
