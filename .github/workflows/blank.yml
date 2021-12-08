@@ -54,9 +54,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
-          az account show
-          az account management-group list
-
+          az account set -s e93299a4-6312-4812-aebb-c5299ee6570b
+          
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
