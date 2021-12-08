@@ -55,7 +55,7 @@ jobs:
       - name: Run a one-line script
         run: |
           az account show
-      
+          az account management-group list
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
