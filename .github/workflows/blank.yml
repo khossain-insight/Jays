@@ -43,12 +43,24 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
+          creds: ${{ secrets.AZURE_SP }}
+          
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: |
+          az account show
+          
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           name: jayartifact
           path: ./
-
+     
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
@@ -56,6 +68,7 @@ jobs:
           
   Test:
     needs: build
+    if: falure()
     runs-on: ubuntu-latest
     steps:
       - name: Download a Build Artifact
