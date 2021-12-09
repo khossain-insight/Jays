@@ -50,7 +50,7 @@ jobs:
         with:
           # Specify the Az PowerShell script here.
           inlineScript: |
-            .\modules\test.ps1 
+            .\modules\test.ps1 |
               -Parameter1 haha
           azPSVersion: latest
           
@@ -81,7 +81,7 @@ jobs:
         with:
           # Specify the Az PowerShell script here.
           inlineScript: |
-            .\modules\test.ps1 -Parameter1 haha
+            . "modules\test.ps1" -Parameter1 haha
           azPSVersion: latest
           
       - name: Run a one-line script
