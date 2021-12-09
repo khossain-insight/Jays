@@ -31,6 +31,7 @@ on:
 env:
   agentWin: windows-latest
   TES: TEST
+  Azure: 'secrets.AZURE_SP'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -48,7 +49,7 @@ jobs:
         uses: Azure/login@v1
         with:
           # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-          creds: ${{ secrets.AZURE_SP }}
+          creds: ${{ env.Azure }}
           allow-no-subscriptions: true
           
       # Runs a single command using the runners shell
