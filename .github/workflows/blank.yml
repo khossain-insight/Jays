@@ -65,8 +65,8 @@ jobs:
     if: success()
     runs-on: ubuntu-latest
     env:
-      path: .\Modules\test.ps1
-      para: haha
+      path: '.\Modules\test.ps1'
+      para: 'haha'
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
