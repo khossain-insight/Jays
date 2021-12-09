@@ -45,14 +45,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
          
-      - name: Azure PowerShell Action
-        uses: Azure/powershell@v1
+      - name: Azure Login
+        uses: Azure/login@v1
         with:
-          # Specify the Az PowerShell script here.
-          inlineScript: |
-            .\modules\test.ps1 -Parameter1 haha
-          azPSVersion: latest
-          
+          # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
+          creds: ${{ secrets.AZURE_SP }}
+          allow-no-subscriptions: true
+		      enable-AzPSSession: true
+         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
@@ -74,9 +74,7 @@ jobs:
         uses: actions/download-artifact@v2.0.10
         with:
           name: jayartifact
-      - name: run cmd
-        run: |
-          dir
+          
       - name: Azure PowerShell Action
         uses: Azure/powershell@v1
         with:
