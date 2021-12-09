@@ -80,7 +80,7 @@ jobs:
         with:
           # Specify the Az PowerShell script here.
           inlineScript: |
-            ".\Modules\test.ps1" -Parameter1 haha
+            ".\Modules\test.ps1 -Parameter1 haha"
           azPSVersion: latest
           
       - name: Run a one-line script
