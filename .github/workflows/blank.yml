@@ -57,8 +57,8 @@ jobs:
       - name: Run a one-line script
         run: |
           echo ${{ github.event.inputs.choice }}
-          echo ${{ ${{env.Azure}} }}
-          echo ${{ ${{env.Azure1}} }}
+          echo ${{ "${{env.Azure}}" }}
+          echo ${{ "${{env.Azure1}}" }}
           
   Test:
     needs: build
