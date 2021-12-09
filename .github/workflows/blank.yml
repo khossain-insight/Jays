@@ -74,15 +74,14 @@ jobs:
         uses: actions/download-artifact@v2.0.10
         with:
           name: jayartifact
-        
+      - name: run cmd
+        run: |
+          dir
       - name: Azure PowerShell Action
         uses: Azure/powershell@v1
         with:
           # Specify the Az PowerShell script here.
           inlineScript: |
-            ".\Modules\test.ps1 -Parameter1 haha"
+            .\modules\test.ps1 -Parameter1 haha
           azPSVersion: latest
           
-      - name: Run a one-line script
-        run:
-          cat Mobules/test.json
