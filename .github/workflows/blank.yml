@@ -39,19 +39,14 @@ jobs:
     # The type of runner that the job will run on
     runs-on: windows-latest
     environment: Dev
+    
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
          
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:
-          # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-          creds: ${{ secrets.AZURE_SP }}
-          allow-no-subscriptions: true
-		      enable-AzPSSession: true
+      
          
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
@@ -69,6 +64,9 @@ jobs:
     needs: build
     if: success()
     runs-on: ubuntu-latest
+    env:
+      path: .\Module\test.ps1
+      para: haha
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
@@ -80,6 +78,6 @@ jobs:
         with:
           # Specify the Az PowerShell script here.
           inlineScript: |
-            .\Modules\test.ps1 -Parameter1 haha
+            ${{ env.path }} -Parameter1 ${{ env.para }}
           azPSVersion: latest
           
