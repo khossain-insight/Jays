@@ -45,18 +45,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
          
-      - name: Azure Login
-        uses: Azure/login@v1
+      - name: Azure PowerShell Action
+        uses: Azure/powershell@v1
         with:
-          # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-          creds: ${{ secrets.AZURE_SP }}
-          allow-no-subscriptions: true
-          
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: |
-          az account set -s e93299a4-6312-4812-aebb-c5299ee6570b
-          az account show
+          # Specify the Az PowerShell script here.
+          inlineScript: |
+            ./modules/test.ps1 -Parameter1 haha
+          azPSVersion: latest
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
@@ -68,16 +63,25 @@ jobs:
       - name: Run a one-line script
         run: |
           echo ${{ github.event.inputs.choice }}
+          echo ${{ github.event.inputs.choice1 }}
           
   Test:
     needs: build
-    if: failure()
+    if: success()
     runs-on: ubuntu-latest
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
         with:
           name: jayartifact
+        
+      - name: Azure PowerShell Action
+        uses: Azure/powershell@v1
+        with:
+          # Specify the Az PowerShell script here.
+          inlineScript: |
+            ./modules/test.ps1 -Parameter1 haha
+          azPSVersion: latest
           
       - name: Run a one-line script
         run:
