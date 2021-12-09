@@ -82,6 +82,6 @@ jobs:
         with:
           # Specify the Az PowerShell script here.
           inlineScript: |
-            .\modules\test.ps1 -Parameter1 haha
+            .\Modules\test.ps1 -Parameter1 haha
           azPSVersion: latest
           
