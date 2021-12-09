@@ -73,11 +73,16 @@ jobs:
     env:
       path: './Modules/test.ps1'
       para: 'haha'
+      mytest: '${{env.para}}/blabla'
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
         with:
           name: jayartifact
+          
+      - name: cmd
+        run: |
+          echo ${{ env.mytest }}
           
       - name: Azure PowerShell Action
         uses: Azure/powershell@v1
