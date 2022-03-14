@@ -1,0 +1,28 @@
+- stage: Deploy
+    #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    condition: succeeded()
+    pool:
+      vmImage: $(agent)
+    variables:
+      templatelockPath: "$(Pipeline.Workspace)/BuildArtifacts/Modules/Microsoft.Authorization/locks/locks.deploy.json"
+      templatelockParameterPath: "$(corePathConfig)/Microsoft.Authorization-locks"
+    jobs:
+      ## Management Resources  
+      - deployment: "Management"
+        variables:
+          
+          ## Resource Groups - Variables
+          templateResourceGroupsPath: "$(corePathModules)/Microsoft.Resources/resourceGroups/resourceGroups.deploy.json"
+          templateResourceGroupsPlatformParameterPath: "$(corePathConfig)/Microsoft.Resources-resourceGroups/${{ parameters.consumer }}-rg-$(regionPrefix)-${{ parameters.envTarget }}-${{ variables.classificationPrefix }}-platform.parameters.json"
+          ## NSG Flow Log Storage - Variables
+          templateStorageAccountsPath: "$(corePathModules)/Microsoft.Storage/storageAccounts/storageAccounts.deploy.json"
+          templateNflStorageAccountsParameterPath: "$(corePathConfig)/Microsoft.Storage-storageAccounts/lz-${{ parameters.consumer }}-sa-$(regionPrefix)-${{ parameters.envTarget }}-flowlog-01.parameters.json"
+          templateMinioStorageAccountsParameterPath: "$(corePathConfig)/Microsoft.Storage-storageAccounts/lz-${{ parameters.consumer }}-sa-$(regionPrefix)-${{ parameters.envTarget }}-minio-01.parameters.json"
+          templatePolicyAssignmentsPath: "$(corePathModules)/Microsoft.Authorization/policyAssignments/policyAssignments_sub.deploy.json"
+          templateNsgFlowLogPolicyAssignmentsParameterPath: "$(corePathConfig)/Microsoft.Authorization-policyAssignments"  
+
+        environment: Consumerstest
+        strategy:
+          runOnce:
+            deploy:
+              steps:
